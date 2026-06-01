@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gilbert Chen - Human Intent, AI Execution</title>
+    <meta
+      name="description"
+      content="Gilbert Chen builds agentic systems, creative tools, and personal infrastructure for people who want to think and make with AI."
+    />
+    <meta property="og:title" content="Gilbert Chen - Human Intent, AI Execution" />
+    <meta
+      property="og:description"
+      content="A personal homepage for agentic systems, creative tools, and personal infrastructure."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/workbench-hero.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #101418;
+        --bg-deep: #080b0d;
+        --surface: #151b1e;
+        --surface-2: #1b2326;
+        --line: #2a3036;
+        --text: #f2f0ea;
+        --muted: #a7adb2;
+        --soft: #788187;
+        --teal: #3fae9f;
+        --gold: #d6a84f;
+        --ink: #0d1113;
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        letter-spacing: 0;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: linear-gradient(to bottom, black, transparent 80%);
+        z-index: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .site {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        overflow: clip;
+      }
+
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        border-bottom: 1px solid rgba(242, 240, 234, 0.08);
+        background: rgba(8, 11, 13, 0.72);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav-inner {
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 680;
+      }
+
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(63, 174, 159, 0.7);
+        display: grid;
+        place-items: center;
+        color: var(--teal);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        font-size: 14px;
+        padding: 10px 12px;
+        border-radius: 6px;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        background: rgba(242, 240, 234, 0.06);
+        color: var(--text);
+        outline: none;
+      }
+
+      .hero {
+        min-height: 86vh;
+        display: grid;
+        align-items: end;
+        position: relative;
+        padding: 128px 0 56px;
+        isolation: isolate;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(8, 11, 13, 0.94) 0%, rgba(8, 11, 13, 0.7) 38%, rgba(8, 11, 13, 0.36) 100%),
+          linear-gradient(0deg, var(--bg) 0%, rgba(16, 20, 24, 0.08) 42%),
+          url("assets/workbench-hero.png") center / cover no-repeat;
+        z-index: -2;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 42%;
+        background: linear-gradient(to bottom, transparent, var(--bg));
+        z-index: -1;
+      }
+
+      .container {
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .hero-content {
+        max-width: 790px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--gold);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        background: var(--teal);
+        box-shadow: 0 0 18px rgba(63, 174, 159, 0.8);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 18px;
+        font-size: clamp(58px, 10vw, 132px);
+        line-height: 0.9;
+        font-weight: 760;
+      }
+
+      .hero-lede {
+        margin-top: 24px;
+        color: var(--text);
+        font-size: clamp(24px, 3.6vw, 48px);
+        line-height: 1.04;
+        font-weight: 640;
+        max-width: 780px;
+      }
+
+      .hero-copy {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: clamp(17px, 1.8vw, 21px);
+        line-height: 1.75;
+        max-width: 690px;
+      }
+
+      .actions {
+        margin-top: 34px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .button {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 18px;
+        border: 1px solid rgba(242, 240, 234, 0.16);
+        border-radius: 6px;
+        color: var(--text);
+        background: rgba(242, 240, 234, 0.06);
+        font-weight: 650;
+      }
+
+      .button.primary {
+        background: var(--text);
+        color: var(--ink);
+        border-color: var(--text);
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-1px);
+        border-color: rgba(63, 174, 159, 0.8);
+        outline: none;
+      }
+
+      section {
+        padding: 88px 0;
+        border-top: 1px solid rgba(242, 240, 234, 0.08);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 0.76fr 1.24fr;
+        gap: 56px;
+        align-items: start;
+        margin-bottom: 42px;
+      }
+
+      .kicker {
+        color: var(--teal);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 13px;
+      }
+
+      h2 {
+        margin-top: 14px;
+        font-size: clamp(32px, 5vw, 62px);
+        line-height: 1;
+        font-weight: 720;
+      }
+
+      .section-copy {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.75;
+      }
+
+      .workbench-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid rgba(242, 240, 234, 0.1);
+      }
+
+      .system-panel {
+        min-height: 236px;
+        padding: 26px;
+        border-right: 1px solid rgba(242, 240, 234, 0.1);
+        border-bottom: 1px solid rgba(242, 240, 234, 0.1);
+        background: linear-gradient(180deg, rgba(242, 240, 234, 0.035), rgba(242, 240, 234, 0.012));
+      }
+
+      .system-panel:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .system-panel:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .panel-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 26px;
+      }
+
+      .status {
+        color: var(--gold);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+      }
+
+      .glyph {
+        width: 38px;
+        height: 38px;
+        border: 1px solid rgba(63, 174, 159, 0.44);
+        display: grid;
+        place-items: center;
+        color: var(--teal);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      }
+
+      h3 {
+        font-size: 24px;
+        line-height: 1.15;
+      }
+
+      .system-panel p,
+      .project p,
+      .note p {
+        margin-top: 14px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .principles {
+        background: var(--bg-deep);
+      }
+
+      .principle-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(242, 240, 234, 0.1);
+      }
+
+      .principle {
+        min-height: 260px;
+        padding: 24px;
+        background: var(--bg-deep);
+      }
+
+      .principle span {
+        display: block;
+        color: var(--gold);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+        margin-bottom: 44px;
+      }
+
+      .principle p {
+        color: var(--muted);
+        margin-top: 14px;
+        line-height: 1.6;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+
+      .project {
+        position: relative;
+        min-height: 250px;
+        padding: 26px;
+        border: 1px solid rgba(242, 240, 234, 0.1);
+        background: var(--surface);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .project::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-top: 3px solid var(--teal);
+        opacity: 0.75;
+      }
+
+      .project-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--soft);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+        margin-bottom: 28px;
+      }
+
+      .notes {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 34px;
+        align-items: stretch;
+      }
+
+      .notes-main {
+        min-height: 430px;
+        padding: 32px;
+        border: 1px solid rgba(242, 240, 234, 0.1);
+        background:
+          linear-gradient(180deg, rgba(63, 174, 159, 0.08), transparent 48%),
+          var(--surface);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .quote {
+        font-size: clamp(28px, 4vw, 52px);
+        line-height: 1.08;
+        font-weight: 700;
+      }
+
+      .notes-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .note {
+        padding: 22px;
+        border: 1px solid rgba(242, 240, 234, 0.1);
+        border-radius: 8px;
+        background: rgba(242, 240, 234, 0.035);
+      }
+
+      .about {
+        background:
+          linear-gradient(90deg, rgba(63, 174, 159, 0.06), transparent 34%),
+          var(--bg);
+      }
+
+      .about-copy {
+        display: grid;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.8;
+        padding-top: 4px;
+      }
+
+      .contact {
+        padding-bottom: 112px;
+      }
+
+      .contact-band {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 42px;
+        align-items: end;
+        padding: 42px;
+        border: 1px solid rgba(242, 240, 234, 0.12);
+        background:
+          linear-gradient(135deg, rgba(214, 168, 79, 0.12), transparent 34%),
+          linear-gradient(315deg, rgba(63, 174, 159, 0.12), transparent 40%),
+          var(--surface-2);
+        border-radius: 8px;
+      }
+
+      .contact-copy {
+        margin-top: 20px;
+        color: var(--muted);
+        line-height: 1.75;
+        font-size: 18px;
+      }
+
+      .contact-links {
+        display: grid;
+        gap: 12px;
+      }
+
+      .contact-links a {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0 16px;
+        border: 1px solid rgba(242, 240, 234, 0.12);
+        border-radius: 6px;
+        color: var(--text);
+        background: rgba(8, 11, 13, 0.26);
+      }
+
+      .contact-links a:hover,
+      .contact-links a:focus-visible {
+        border-color: rgba(63, 174, 159, 0.8);
+        outline: none;
+      }
+
+      footer {
+        border-top: 1px solid rgba(242, 240, 234, 0.08);
+        padding: 26px 0;
+        color: var(--soft);
+        font-size: 14px;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 600ms ease, transform 600ms ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 900px) {
+        .nav-inner {
+          width: min(var(--max), calc(100% - 28px));
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .container {
+          width: min(var(--max), calc(100% - 28px));
+        }
+
+        .hero {
+          min-height: 88vh;
+          padding-top: 108px;
+        }
+
+        .hero::before {
+          background:
+            linear-gradient(90deg, rgba(8, 11, 13, 0.94), rgba(8, 11, 13, 0.7)),
+            linear-gradient(0deg, var(--bg) 0%, rgba(16, 20, 24, 0.1) 42%),
+            url("assets/workbench-hero.png") center / cover no-repeat;
+        }
+
+        .section-head,
+        .notes,
+        .contact-band {
+          grid-template-columns: 1fr;
+        }
+
+        .workbench-grid,
+        .projects-grid,
+        .principle-list {
+          grid-template-columns: 1fr;
+        }
+
+        .system-panel,
+        .system-panel:nth-child(2n),
+        .system-panel:nth-last-child(-n + 2) {
+          border-right: 0;
+          border-bottom: 1px solid rgba(242, 240, 234, 0.1);
+        }
+
+        .system-panel:last-child {
+          border-bottom: 0;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero-copy,
+        .section-copy,
+        .contact-copy,
+        .about-copy {
+          font-size: 16px;
+        }
+
+        .actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        section {
+          padding: 68px 0;
+        }
+
+        .system-panel,
+        .project,
+        .principle,
+        .notes-main,
+        .note,
+        .contact-band {
+          padding: 20px;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 1ms !important;
+          animation-duration: 1ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site">
+      <nav class="nav" aria-label="Primary navigation">
+        <div class="nav-inner">
+          <a class="brand" href="#top" aria-label="Gilbert Chen home">
+            <span class="brand-mark">GC</span>
+            <span>Gilbert Chen</span>
+          </a>
+          <div class="nav-links">
+            <a href="#workbench">Work</a>
+            <a href="#principles">Principles</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+            <a href="#notes">Notes</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <header class="hero" id="top">
+        <div class="container">
+          <div class="hero-content reveal">
+            <div class="eyebrow">Agentic systems / Personal infrastructure</div>
+            <h1>Gilbert Chen</h1>
+            <p class="hero-lede">I build the operating layer between human intent and AI execution.</p>
+            <p class="hero-copy">
+              我把 AI agent、工程工具、知识管理和创意流程编排在一起，让想法不只是被记录，而是能被推进、验证、交付。
+            </p>
+            <div class="actions" aria-label="Primary calls to action">
+              <a class="button primary" href="#workbench">Explore the Work</a>
+              <a class="button" href="#notes">Read the Notes</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="workbench">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">01 / Workbench</div>
+                <h2>The working system behind the work.</h2>
+              </div>
+              <p class="section-copy">
+                我的项目大多围绕一个问题展开：当一个人拥有越来越多 AI、脚本、文档、浏览器、代码仓库和自动化流程时，
+                怎样让它们不变成噪音，而是成为一个可调度、可记忆、可迭代的工作系统？
+              </p>
+            </div>
+
+            <div class="workbench-grid reveal">
+              <article class="system-panel">
+                <div class="panel-top">
+                  <span class="glyph">OS</span>
+                  <span class="status">orchestration</span>
+                </div>
+                <h3>osstack</h3>
+                <p>Multi-agent software development orchestration: routing, tracking, review gates, and delivery rhythm for complex builds.</p>
+              </article>
+              <article class="system-panel">
+                <div class="panel-top">
+                  <span class="glyph">CX</span>
+                  <span class="status">workflow</span>
+                </div>
+                <h3>Codex / Hermes workflows</h3>
+                <p>From idea to code, tests, documents, assets, and launch surfaces, with each step turned into repeatable operational memory.</p>
+              </article>
+              <article class="system-panel">
+                <div class="panel-top">
+                  <span class="glyph">KB</span>
+                  <span class="status">memory</span>
+                </div>
+                <h3>Local knowledge systems</h3>
+                <p>Experiments in making files, notes, metadata, and context searchable enough to become a useful external mind.</p>
+              </article>
+              <article class="system-panel">
+                <div class="panel-top">
+                  <span class="glyph">CP</span>
+                  <span class="status">creation</span>
+                </div>
+                <h3>Creative production lines</h3>
+                <p>Design, writing, presentations, publishing, and research pipelines that move from spark to shipped artifact with less friction.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="principles" id="principles">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">02 / Principles</div>
+                <h2>Tools should make people sharper.</h2>
+              </div>
+              <p class="section-copy">
+                我喜欢的工具不是替人思考，而是让人更清楚地思考。好的系统应该减少摩擦，不减少人的判断；
+                应该放大创造力，不把创造力包装成模板。
+              </p>
+            </div>
+
+            <div class="principle-list reveal">
+              <article class="principle">
+                <span>01</span>
+                <h3>Agency over automation</h3>
+                <p>Automation should serve intent, not steal the steering wheel.</p>
+              </article>
+              <article class="principle">
+                <span>02</span>
+                <h3>Memory over prompts</h3>
+                <p>Long-lived context matters more than one brilliant instruction.</p>
+              </article>
+              <article class="principle">
+                <span>03</span>
+                <h3>Tools as companions</h3>
+                <p>A good tool appears naturally inside ordinary work and respects taste.</p>
+              </article>
+              <article class="principle">
+                <span>04</span>
+                <h3>Shipping as learning</h3>
+                <p>Things begin to teach back only when they can run, fail, and be used.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">03 / Selected Projects</div>
+                <h2>Infrastructure, not ornaments.</h2>
+              </div>
+              <p class="section-copy">
+                These projects are not isolated demos. They are pieces of a larger personal operating layer: systems that remember, route, compose,
+                and help ideas survive contact with real work.
+              </p>
+            </div>
+
+            <div class="projects-grid reveal">
+              <article class="project">
+                <div class="project-meta"><span>agent PM layer</span><span>active</span></div>
+                <h3>osstack</h3>
+                <p>Project-manager layer for agentic software development. It turns scattered AI coding sessions into a managed delivery lifecycle.</p>
+              </article>
+              <article class="project">
+                <div class="project-meta"><span>workflow library</span><span>growing</span></div>
+                <h3>Agent Skills Library</h3>
+                <p>Reusable workflows for design, code review, research, documents, spreadsheets, presentations, publishing, and launch work.</p>
+              </article>
+              <article class="project">
+                <div class="project-meta"><span>knowledge infra</span><span>experimental</span></div>
+                <h3>Personal Knowledge Infrastructure</h3>
+                <p>Making local files, notes, metadata, and context legible enough for AI collaborators to work with the actual shape of a life.</p>
+              </article>
+              <article class="project">
+                <div class="project-meta"><span>creative systems</span><span>iterating</span></div>
+                <h3>Creative Production Pipelines</h3>
+                <p>Systems for turning ideas into pages, posts, decks, product surfaces, and visual assets without losing the original taste.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="notes">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">04 / Notes</div>
+                <h2>Notes on building with AI.</h2>
+              </div>
+              <p class="section-copy">
+                我会记录一些还没完全定型的东西：AI 协作、个人工具、产品直觉、系统设计，以及那些在实际构建中慢慢变清楚的问题。
+              </p>
+            </div>
+
+            <div class="notes reveal">
+              <article class="notes-main">
+                <p class="quote">The interesting part is not faster tasks. It is a new way to organize intent, memory, judgment, and action.</p>
+                <p class="section-copy">
+                  Field notes from the edge of personal infrastructure, agentic workflows, and the strange comfort of tools that remember.
+                </p>
+              </article>
+              <div class="notes-list" aria-label="Note categories">
+                <article class="note">
+                  <h3>Agentic Workflows</h3>
+                  <p>How teams of tools move from instruction to verified work.</p>
+                </article>
+                <article class="note">
+                  <h3>Personal Infrastructure</h3>
+                  <p>Local-first systems, external memory, and the shape of a durable workspace.</p>
+                </article>
+                <article class="note">
+                  <h3>Product Taste</h3>
+                  <p>Why the best interfaces feel quiet, capable, and alive.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="about" id="about">
+          <div class="container">
+            <div class="section-head reveal">
+              <div>
+                <div class="kicker">05 / About</div>
+                <h2>A builder of systems that remember.</h2>
+              </div>
+              <div class="about-copy">
+                <p>
+                  我对工具的兴趣，最终都落在同一个问题上：怎样让一个人更自由、更清醒、更有能力地完成复杂创造。
+                </p>
+                <p>
+                  我写代码，也设计工作流；我关心系统边界，也关心使用它的人会不会感到被理解。现在我主要在探索 AI agents、
+                  个人知识基础设施、自动化生产线，以及它们如何变成一种新的个人操作系统。
+                </p>
+                <p>
+                  对我来说，AI 最有意思的地方不只是“更快完成任务”，而是它开始改变我们组织意图、记忆、判断和行动的方式。
+                  好的工具应该像一个可靠的合作者：记得上下文，尊重人的品味，能推进事情，也知道什么时候把选择权交还给人。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="contact" id="contact">
+          <div class="container">
+            <div class="contact-band reveal">
+              <div>
+                <div class="kicker">06 / Contact</div>
+                <h2>Work with me.</h2>
+                <p class="contact-copy">
+                  如果你也在思考 AI 如何进入真实工作流，而不是停留在演示、聊天框或一次性脚本里，我们可能会聊得很快。
+                </p>
+              </div>
+              <div class="contact-links">
+                <a href="https://github.com/gilosbornhello" target="_blank" rel="noreferrer"><span>GitHub</span><span>open</span></a>
+                <a href="https://x.com/gilosbornhello" target="_blank" rel="noreferrer"><span>X / Twitter</span><span>open</span></a>
+                <a href="#notes"><span>Notes</span><span>read</span></a>
+                <a href="#top"><span>Back to top</span><span>up</span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container footer-inner">
+          <span>Gilbert Chen</span>
+          <span>Human intent / AI execution / Living systems</span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.16 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+    </script>
+  </body>
+</html>
