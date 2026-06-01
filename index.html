@@ -464,6 +464,38 @@
         padding-top: 4px;
       }
 
+      .about-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 42px;
+        align-items: start;
+      }
+
+      .profile-signal {
+        border: 1px solid rgba(242, 240, 234, 0.12);
+        border-radius: 8px;
+        background: rgba(8, 11, 13, 0.45);
+        overflow: hidden;
+      }
+
+      .profile-signal img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .profile-caption {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-top: 1px solid rgba(242, 240, 234, 0.1);
+        color: var(--muted);
+        font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+      }
+
       .contact {
         padding-bottom: 112px;
       }
@@ -564,8 +596,13 @@
 
         .section-head,
         .notes,
-        .contact-band {
+        .contact-band,
+        .about-layout {
           grid-template-columns: 1fr;
+        }
+
+        .profile-signal {
+          max-width: 420px;
         }
 
         .workbench-grid,
@@ -842,18 +879,31 @@
                 <div class="kicker">05 / About</div>
                 <h2>A builder of systems that remember.</h2>
               </div>
-              <div class="about-copy">
-                <p>
-                  我对工具的兴趣，最终都落在同一个问题上：怎样让一个人更自由、更清醒、更有能力地完成复杂创造。
-                </p>
-                <p>
-                  我写代码，也设计工作流；我关心系统边界，也关心使用它的人会不会感到被理解。现在我主要在探索 AI agents、
-                  个人知识基础设施、自动化生产线，以及它们如何变成一种新的个人操作系统。
-                </p>
-                <p>
-                  对我来说，AI 最有意思的地方不只是“更快完成任务”，而是它开始改变我们组织意图、记忆、判断和行动的方式。
-                  好的工具应该像一个可靠的合作者：记得上下文，尊重人的品味，能推进事情，也知道什么时候把选择权交还给人。
-                </p>
+              <div class="about-layout">
+                <div class="about-copy">
+                  <p>
+                    我对工具的兴趣，最终都落在同一个问题上：怎样让一个人更自由、更清醒、更有能力地完成复杂创造。
+                  </p>
+                  <p>
+                    我写代码，也设计工作流；我关心系统边界，也关心使用它的人会不会感到被理解。现在我主要在探索 AI agents、
+                    个人知识基础设施、自动化生产线，以及它们如何变成一种新的个人操作系统。
+                  </p>
+                  <p>
+                    对我来说，AI 最有意思的地方不只是“更快完成任务”，而是它开始改变我们组织意图、记忆、判断和行动的方式。
+                    好的工具应该像一个可靠的合作者：记得上下文，尊重人的品味，能推进事情，也知道什么时候把选择权交还给人。
+                  </p>
+                </div>
+                <figure class="profile-signal" aria-label="Gilbert Chen social profile and visual interests">
+                  <img
+                    src="assets/gilbert-profile-grid.jpg"
+                    alt="A social profile screenshot for gilbertchen showing builder, investor, explorer, AI systems, travel, diving, aviation, and space imagery."
+                    loading="lazy"
+                  />
+                  <figcaption class="profile-caption">
+                    <span>builder / investor / explorer</span>
+                    <span>visual field note</span>
+                  </figcaption>
+                </figure>
               </div>
             </div>
           </div>
